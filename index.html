@@ -9,7 +9,13 @@
 	<script src="https://cdn.usefathom.com/script.js" data-site="JNOSVOQE" defer></script>
 </head>
 <style>
+	:root, body {
+		touch-action: none;
+		overscroll-behavior: none;
+	}
+
 	:root {
+		overflow: hidden;
 		--bleed: 0px;
 		min-height: 100%;
 		padding-block: var(--bleed);
@@ -20,8 +26,6 @@
 		margin: 0;
 		min-height: 100vh;
 		min-height: 100svh;
-		touch-action: auto;
-		overscroll-behavior-y: auto;
 		background: transparent;
 	}
 
