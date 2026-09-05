@@ -11,16 +11,15 @@
 <style>
 	:root {
 		--bleed: 0px;
-		--background-y: 0px;
 		min-height: 100%;
 		padding-block: var(--bleed);
-		background: url('./colson.jpg') center var(--background-y) / cover no-repeat;
+		background: url('./colson.jpg') center / cover no-repeat;
 	}
 
 	body {
 		margin: 0;
 		min-height: 100vh;
-		min-height: 100lvh;
+		min-height: 100svh;
 		touch-action: auto;
 		overscroll-behavior-y: auto;
 		background: transparent;
@@ -31,6 +30,12 @@
 			/* Safari 26 can report zero safe-area insets despite visible bars.
 			   Keep image content beyond both edges of its layout viewport. */
 			--bleed: max(100px, env(safe-area-inset-top), env(safe-area-inset-bottom));
+			/* Let Safari position the page without JavaScript scroll resets. */
+			scroll-snap-type: y mandatory;
+		}
+
+		body {
+			scroll-snap-align: start;
 		}
 	}
 </style>
@@ -38,28 +43,4 @@
 	role="img"
 	aria-label="Colson, tabby cat, fit to his Saint Marks Place IKEA couch armrest"
 ></body>
-<script>
-if (CSS.supports('-webkit-touch-callout', 'none')) {
-	const root = document.documentElement;
-	let anchor = 0;
-
-	// Paint on the document: fixed elements are clipped above Safari's controls.
-	// Counter document scrolling without cancelling native touch gestures.
-	const positionBackground = () => {
-		root.style.setProperty('--background-y', `${scrollY - anchor}px`);
-	};
-	const centerImage = () => {
-		if (visualViewport && visualViewport.scale !== 1) return;
-		anchor = parseFloat(getComputedStyle(root).paddingTop);
-		scrollTo({ top: anchor, behavior: 'instant' });
-		positionBackground();
-	};
-
-	addEventListener('scroll', positionBackground, { passive: true });
-	addEventListener('scrollend', centerImage);
-	addEventListener('resize', centerImage);
-	addEventListener('pageshow', centerImage);
-	requestAnimationFrame(centerImage);
-}
-</script>
 <!-- 𝓙𝓪𝓬𝓸𝓫 𝓕𝓸𝓻𝓭, 2026 -->
